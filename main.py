@@ -39,10 +39,8 @@ while is_on:
         scoreboard.game_over()
 
     """Collision with tail"""
-    for segment in snake.segments:
-        if segment == snake.head:
-            pass
-        elif snake.head.distance(segment) < 15:
+    for segment in snake.segments[1:]:
+        if snake.head.distance(segment) < 15:
             is_on = False
             scoreboard.game_over()
 
