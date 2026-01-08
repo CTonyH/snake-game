@@ -3,7 +3,6 @@ from scoreboard import Scoreboard
 from snake import Snake
 from food import Food
 import time
-from PIL.ImageOps import posterize
 
 screen = Screen()
 screen.setup(width=600, height=600)
@@ -33,15 +32,16 @@ while is_on:
         food.refresh()
         snake.extend_snake()
         scoreboard.add_score()
+
     """Collision with border"""
     if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
-        is_on = False
-        scoreboard.game_over()
+        scoreboard.reset()
+        snake.reset()
 
     """Collision with tail"""
     for segment in snake.segments[1:]:
         if snake.head.distance(segment) < 15:
-            is_on = False
-            scoreboard.game_over()
+            scoreboard.reset()
+            snake.reset()
 
 screen.exitonclick()
